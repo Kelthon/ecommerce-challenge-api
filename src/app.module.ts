@@ -4,7 +4,8 @@ import { AppService } from './app.service';
 import { CategoryModule } from './category/category.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ProductModule } from './product/product.module';
-
+import { Category } from './category/entities/category.entity';
+import { Product } from './product/entities/product.entity';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -14,7 +15,7 @@ import { ProductModule } from './product/product.module';
       username: 'postgres',
       password: 'root',
       database: 'ecommerce-challenge',
-      entities: [__dirname + '/../**/*.entity{.ts,.js}'],
+      entities: [Category, Product],
       synchronize: false,
     }),
     CategoryModule,
