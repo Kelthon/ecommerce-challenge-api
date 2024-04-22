@@ -1,19 +1,31 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  AfterInsert,
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
-@Entity()
+@Entity({ name: 'Category' })
 export class Category {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ type: 'varchar', length: 50, nullable: false, unique: true })
   name: string;
 
-  @Column()
+  @Column({ type: 'varchar', length: 250, nullable: true })
   image_link: string;
 
-  @Column()
+  @CreateDateColumn()
   created_date: Date;
 
-  @Column()
+  @UpdateDateColumn()
   updated_date: Date;
+
+  @AfterInsert()
+  insertLog() {
+    console.log(`A new category was created - [${this.id}]: ${this.name}`);
+  }
 }
