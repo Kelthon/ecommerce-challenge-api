@@ -1,8 +1,10 @@
+import { Product } from 'src/product/entities/product.entity';
 import {
   AfterInsert,
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -24,8 +26,11 @@ export class Category {
   @UpdateDateColumn()
   updated_date: Date;
 
+  @OneToMany(() => Product, (product) => product.category)
+  products: Product;
+
   @AfterInsert()
-  insertLog() {
+  afterInsert() {
     console.log(`A new category was created - [${this.id}]: ${this.name}`);
   }
 }
