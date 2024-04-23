@@ -6,6 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ProductModule } from './product/product.module';
 import { Category } from './category/entities/category.entity';
 import { Product } from './product/entities/product.entity';
+
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -16,7 +17,7 @@ import { Product } from './product/entities/product.entity';
       password: 'root',
       database: 'ecommerce-challenge',
       entities: [Category, Product],
-      synchronize: false,
+      synchronize: true,
     }),
     CategoryModule,
     ProductModule,
