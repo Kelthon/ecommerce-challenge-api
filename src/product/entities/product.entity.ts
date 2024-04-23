@@ -1,46 +1,97 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Category } from 'src/category/entities/category.entity';
+import {
+  AfterInsert,
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
-@Entity()
+@Entity('Product')
 export class Product {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({
+    type: 'varchar',
+    length: 50,
+    nullable: false,
+  })
   name: string;
 
-  @Column()
+  @Column({
+    type: 'varchar',
+    length: 10,
+    nullable: false,
+  })
   sku: string;
 
-  @Column()
-  category_id: string;
+  @ManyToOne(() => Category, (category) => category.products)
+  category: Category;
 
-  @Column()
+  @Column({
+    type: 'varchar',
+    length: 250,
+    nullable: false,
+  })
   description: string;
 
-  @Column()
+  @Column({
+    type: 'varchar',
+    length: 500,
+    nullable: false,
+  })
   large_description: string;
 
-  @Column()
+  @Column({
+    type: 'money',
+    nullable: false,
+  })
   price: number;
 
-  @Column()
+  @Column({
+    type: 'money',
+    nullable: true,
+  })
   discount_price: number;
 
-  @Column()
+  @Column({
+    type: 'numeric',
+    nullable: true,
+  })
   discount_percent: number;
 
-  @Column()
+  @Column({
+    type: 'boolean',
+    nullable: false,
+    default: () => 'TRUE',
+  })
   is_new: boolean;
 
-  @Column()
+  @Column({
+    type: 'varchar',
+    length: 250,
+    nullable: false,
+  })
   image_link: string;
 
-  @Column()
+  @Column({
+    type: 'varchar',
+    length: 1000,
+    nullable: true,
+  })
   other_image_link: string;
 
-  @Column()
+  @CreateDateColumn()
   created_date: Date;
 
-  @Column()
+  @UpdateDateColumn()
   updated_date: Date;
+
+  @AfterInsert()
+  afterInsert() {
+    console.log(`A new product was created - [${this.id}]: ${this.name}`);
+  }
 }
