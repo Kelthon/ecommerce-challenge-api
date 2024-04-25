@@ -1,4 +1,4 @@
-import { IsDate, IsOptional, IsString, Length } from 'class-validator';
+import { IsDateString, IsOptional, IsString, Length } from 'class-validator';
 
 export class CreateCategoryDto {
   @Length(3, 50)
@@ -11,10 +11,10 @@ export class CreateCategoryDto {
   image_link: string;
 
   @IsOptional()
-  @IsDate()
+  @IsDateString()
   created_date: Date;
 
   @IsOptional()
-  @IsDate()
+  @IsDateString()
   updated_date: Date;
 }

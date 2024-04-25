@@ -10,7 +10,8 @@ POST http://localhost:3000/category/new
 content-type: application/json
 
 {
-  "name": "hot"
+  "name": "new",
+  "created_date": "2022-03-06T11:00:00.000Z"
 }
 
 ### Update a category
