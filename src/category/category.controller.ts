@@ -25,12 +25,24 @@ export class CategoryController {
 
   @Get('/all')
   findAll(
-    @Query('limit') limit: number,
-    @Query('offset') page: number,
+    @Query('limit') limit: number = 16,
+    @Query('page') page: number = 0,
     @Query('sort') sort: keyof SearchCategoryDto,
-    @Query('order') order: FindOptionsOrderValue,
+    @Query('order') order: FindOptionsOrderValue = 'asc',
   ) {
-    return this.categoryService.findAll(limit, page, sort, order);
+    const orderBy: {
+      [param in keyof SearchCategoryDto]?: FindOptionsOrderValue;
+    } = { id: 'ASC' };
+
+    if (sort) {
+      orderBy[sort] = order;
+    }
+
+    return this.categoryService.findAll({
+      take: limit,
+      skip: limit * page,
+      order: orderBy,
+    });
   }
 
   @Get(':id')

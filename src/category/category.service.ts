@@ -1,11 +1,9 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
-import { Repository } from 'typeorm';
+import { FindManyOptions, Repository } from 'typeorm';
 import { Category } from './entities/category.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { FindOptionsOrderValue } from 'typeorm';
-import { SearchCategoryDto } from './dto/search-category.dto';
 
 @Injectable()
 export class CategoryService {
@@ -19,24 +17,10 @@ export class CategoryService {
   }
 
   async findAll(
-    limit: number = 16,
-    pageIndex: number = 0,
-    sortBy?: keyof SearchCategoryDto,
-    order: FindOptionsOrderValue = 'asc',
+    options?: FindManyOptions<Category>,
   ): Promise<{ page: Category[]; count: number; index: number }> {
-    const orderBy: {
-      [param in keyof SearchCategoryDto]?: FindOptionsOrderValue;
-    } = { id: 'ASC' };
-
-    if (sortBy) {
-      orderBy[sortBy] = order;
-    } else orderBy.id = order;
-
-    const [result, total] = await this.repository.findAndCount({
-      order: orderBy,
-      take: limit,
-      skip: pageIndex * limit,
-    });
+    const [result, total] = await this.repository.findAndCount(options);
+    const pageIndex = 0;
 
     return { page: result, count: total, index: pageIndex };
   }
