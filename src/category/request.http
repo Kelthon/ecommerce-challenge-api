@@ -1,0 +1,21 @@
+### Get all categories
+GET http://localhost:3000/category/all?order=desc&limit=2&offset=0
+
+### Get one categories
+GET http://localhost:3000/category/1
+
+### Create new category
+
+POST http://localhost:3000/category/new
+content-type: application/json
+
+{
+  "name": "hot"
+}
+
+### Update a category
+PATCH  http://localhost:3000/category/update/1
+
+
+### Delete a category
+DELETE   http://localhost:3000/category/delete/1
