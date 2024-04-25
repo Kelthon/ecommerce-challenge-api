@@ -19,11 +19,11 @@ export class CategoryService {
   }
 
   async findAll(
-    limit: number = 24,
-    page?: number,
+    limit: number = 16,
+    pageIndex: number = 0,
     sortBy?: keyof SearchCategoryDto,
     order: FindOptionsOrderValue = 'asc',
-  ): Promise<{ data: Category[]; count: number }> {
+  ): Promise<{ page: Category[]; count: number; index: number }> {
     const orderBy: {
       [param in keyof SearchCategoryDto]?: FindOptionsOrderValue;
     } = { id: 'ASC' };
@@ -35,10 +35,10 @@ export class CategoryService {
     const [result, total] = await this.repository.findAndCount({
       order: orderBy,
       take: limit,
-      skip: page * limit,
+      skip: pageIndex * limit,
     });
 
-    return { data: result, count: total };
+    return { page: result, count: total, index: pageIndex };
   }
 
   findOne(id: number) {

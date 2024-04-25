@@ -1,5 +1,5 @@
 ### Get all categories
-GET http://localhost:3000/category/all?order=desc&limit=2&offset=0
+GET http://localhost:3000/category/all?order=desc&limit=2&page=0
 
 ### Get one categories
 GET http://localhost:3000/category/1
