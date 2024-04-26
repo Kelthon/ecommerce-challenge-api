@@ -1,6 +1,6 @@
 import {
   IsBoolean,
-  IsDate,
+  IsDateString,
   IsInt,
   IsNumber,
   IsOptional,
@@ -61,10 +61,10 @@ export class CreateProductDto {
   other_image_link: string;
 
   @IsOptional()
-  @IsDate()
+  @IsDateString()
   created_date: Date;
 
   @IsOptional()
-  @IsDate()
+  @IsDateString()
   updated_date: Date;
 }
