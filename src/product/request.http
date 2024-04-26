@@ -1,0 +1,28 @@
+### Get all products
+GET http://localhost:3000/product/all
+
+### Get one products
+GET http://localhost:3000/product/1
+
+### Create new product
+
+POST http://localhost:3000/product/new
+content-type: application/json
+
+{
+  "name": "kitchen table",
+  "sku": "TB100",
+  "category_id": 1,
+  "description": "A table for kitchen",
+  "large_description": "A table for kitchen",
+  "price": 499.99,
+  "is_new": true,
+  "image_link": "placeholder.jpg"
+}
+
+### Update a product
+PATCH  http://localhost:3000/product/update/1
+
+
+### Delete a product
+DELETE   http://localhost:3000/product/delete/1
