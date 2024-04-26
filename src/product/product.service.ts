@@ -3,7 +3,7 @@ import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { Product } from './entities/product.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { FindManyOptions, Repository } from 'typeorm';
 
 @Injectable()
 export class ProductService {
@@ -16,8 +16,8 @@ export class ProductService {
     return this.repository.save(product);
   }
 
-  findAll() {
-    return this.repository.find();
+  findAll(options?: FindManyOptions<Product>) {
+    return this.repository.find(options);
   }
 
   findOne(id: number) {

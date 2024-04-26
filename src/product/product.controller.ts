@@ -6,10 +6,13 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
+import { SearchProductDto } from './dto/search-product.dto';
+import { FindOptionsOrderValue, Like } from 'typeorm';
 
 @Controller('product')
 export class ProductController {
@@ -21,8 +24,34 @@ export class ProductController {
   }
 
   @Get('/all')
-  findAll() {
-    return this.productService.findAll();
+  findAll(
+    @Query('name') name: string = '',
+    @Query('limit') limit: number = 16,
+    @Query('page') page: number = 0,
+    @Query('sort') sort: keyof SearchProductDto,
+    @Query('order') order: FindOptionsOrderValue = 'asc',
+  ) {
+    const orderBy: {
+      [param in keyof SearchProductDto]?: FindOptionsOrderValue;
+    } = { id: 'ASC' };
+
+    if (sort) {
+      orderBy[sort] = order;
+    }
+
+    return this.productService.findAll({
+      where: [
+        {
+          name: Like(`%${name}%`),
+        },
+        {
+          description: Like(`%${name}%`),
+        },
+      ],
+      take: limit,
+      skip: limit * page,
+      order: orderBy,
+    });
   }
 
   @Get(':id')
