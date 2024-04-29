@@ -11,11 +11,10 @@ import { Product } from './product/entities/product.entity';
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'postgres',
-      password: 'root',
-      database: 'ecommerce-challenge',
+      url: 'postgres://ysgjgqzj:s_WStSNgmlwARB6YWOiNf_ZmaZ3k8Als@isabelle.db.elephantsql.com/ysgjgqzj',
+      username: 'ysgjgqzj',
+      password: 's_WStSNgmlwARB6YWOiNf_ZmaZ3k8Als',
+      database: 'ecommerce-challenge-db',
       entities: [Category, Product],
       synchronize: true,
     }),

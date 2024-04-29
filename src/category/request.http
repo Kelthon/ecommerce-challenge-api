@@ -10,7 +10,8 @@ POST http://localhost:3000/category/new
 content-type: application/json
 
 {
-  "name": "new",
+  "name": "others",
+  "image_link": "https://i.postimg.cc/MTJY8N15/quarto.png",
   "created_date": "2022-03-06T11:00:00.000Z"
 }
 
@@ -19,4 +20,4 @@ PATCH  http://localhost:3000/category/update/1
 
 
 ### Delete a category
-DELETE   http://localhost:3000/category/delete/1
+DELETE   http://localhost:3000/category/delete/

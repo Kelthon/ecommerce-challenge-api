@@ -28,7 +28,7 @@ export class CategoryService {
   findOne(id: number) {
     return this.repository.findOne({
       where: { id: id },
-      relations: ['products'],
+      relations: ['product'],
     });
   }
 
