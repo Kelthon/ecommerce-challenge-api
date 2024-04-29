@@ -16,8 +16,10 @@ export class ProductService {
     return this.repository.save(product);
   }
 
-  findAll(options?: FindManyOptions<Product>) {
-    return this.repository.find(options);
+  async findAll(options?: FindManyOptions<Product>, page: number = 0) {
+    const [result, total] = await this.repository.findAndCount(options);
+
+    return { page: result, count: total, index: page };
   }
 
   findOne(id: number) {

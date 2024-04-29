@@ -33,25 +33,29 @@ export class ProductController {
   ) {
     const orderBy: {
       [param in keyof SearchProductDto]?: FindOptionsOrderValue;
-    } = { id: 'ASC' };
+    } = { id: 'asc' };
 
     if (sort) {
       orderBy[sort] = order;
+      // `http://localhost:3000/product?sort=${sortBy}&order=${order}&limit=${itemPerPage}&page=${0}`;
     }
 
-    return this.productService.findAll({
-      where: [
-        {
-          name: Like(`%${name}%`),
-        },
-        {
-          description: Like(`%${name}%`),
-        },
-      ],
-      take: limit,
-      skip: limit * page,
-      order: orderBy,
-    });
+    return this.productService.findAll(
+      {
+        where: [
+          {
+            name: Like(`%${name}%`),
+          },
+          {
+            description: Like(`%${name}%`),
+          },
+        ],
+        take: limit,
+        skip: limit * page,
+        order: orderBy,
+      },
+      page,
+    );
   }
 
   @Get(':id')

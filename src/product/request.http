@@ -1,11 +1,10 @@
 ### Get all products
-GET http://localhost:3000/product/all
+GET http://localhost:3000/product/all?sort=name&order=asc&limit=16&page=0
 
 ### Get one products
 GET http://localhost:3000/product/1
 
 ### Create new product
-
 POST http://localhost:3000/product/new
 content-type: application/json
 

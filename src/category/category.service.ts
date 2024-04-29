@@ -18,11 +18,11 @@ export class CategoryService {
 
   async findAll(
     options?: FindManyOptions<Category>,
+    page: number = 0,
   ): Promise<{ page: Category[]; count: number; index: number }> {
     const [result, total] = await this.repository.findAndCount(options);
-    const pageIndex = 0;
 
-    return { page: result, count: total, index: pageIndex };
+    return { page: result, count: total, index: page };
   }
 
   findOne(id: number) {
