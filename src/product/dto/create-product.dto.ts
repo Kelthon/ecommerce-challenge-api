@@ -1,7 +1,6 @@
 import {
   IsBoolean,
   IsDateString,
-  IsInt,
   IsNumber,
   IsOptional,
   IsPositive,
@@ -20,8 +19,6 @@ export class CreateProductDto {
   @IsString()
   sku: string;
 
-  @IsInt()
-  @IsPositive()
   categoryId: number;
 
   @Length(10, 250)

@@ -1,8 +1,7 @@
 ### Get all products
-GET http://localhost:3000/product/all?sort=name&order=asc&limit=16&page=0
-
+GET http://localhost:3000/product/all
 ### Get one products
-GET http://localhost:3000/product/6
+GET http://localhost:3000/product/2
 
 ### Create new product
 POST http://localhost:3000/product/new
@@ -11,7 +10,7 @@ content-type: application/json
 {
   "name": "Wood table",
   "sku": "TB100",
-  "categoryId": 1,
+  "category": 2,
   "description": "A table for kitchen",
   "large_description": "A table for kitchen",
   "price": 499.99,
@@ -20,8 +19,12 @@ content-type: application/json
 }
 
 ### Update a product
-PATCH  http://localhost:3000/product/update/1
+PATCH  http://localhost:3000/product/update/2
+
+{
+  "name": "Other name",
+}
 
 
 ### Delete a product
-DELETE   http://localhost:3000/product/delete/1
+DELETE   http://localhost:3000/product/delete/9

@@ -20,6 +20,7 @@ export class ProductController {
 
   @Post('/new')
   create(@Body() createProductDto: CreateProductDto) {
+    console.log(createProductDto);
     return this.productService.create(createProductDto);
   }
 
