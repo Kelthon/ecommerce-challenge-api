@@ -2,16 +2,16 @@
 GET http://localhost:3000/product/all?sort=name&order=asc&limit=16&page=0
 
 ### Get one products
-GET http://localhost:3000/product/1
+GET http://localhost:3000/product/6
 
 ### Create new product
 POST http://localhost:3000/product/new
 content-type: application/json
 
 {
-  "name": "kitchen table",
+  "name": "Wood table",
   "sku": "TB100",
-  "category_id": 1,
+  "categoryId": 1,
   "description": "A table for kitchen",
   "large_description": "A table for kitchen",
   "price": 499.99,

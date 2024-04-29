@@ -23,14 +23,18 @@ export class ProductService {
   }
 
   findOne(id: number) {
-    return this.repository.findOneBy({ id });
+    return this.repository.findOne({
+      where: { id: id },
+      relations: ['category'],
+    });
   }
 
   update(id: number, updateProductDto: UpdateProductDto) {
-    return `This action updates a #${id} product`;
+    return this.repository.update(id, updateProductDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} product`;
+  async remove(id: number) {
+    const obj = await this.repository.findOneBy({ id });
+    return this.repository.remove(obj);
   }
 }

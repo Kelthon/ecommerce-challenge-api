@@ -26,8 +26,11 @@ export class Category {
   @UpdateDateColumn()
   updated_date: Date;
 
-  @OneToMany(() => Product, (product) => product.category)
-  products: Product;
+  @OneToMany(() => Product, (product) => product.category, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
+  products: Product[];
 
   @AfterInsert()
   afterInsert() {

@@ -22,7 +22,7 @@ export class CreateProductDto {
 
   @IsInt()
   @IsPositive()
-  category_id: number;
+  categoryId: number;
 
   @Length(10, 250)
   @IsString()

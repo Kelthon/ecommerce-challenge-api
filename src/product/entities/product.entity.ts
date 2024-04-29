@@ -28,7 +28,10 @@ export class Product {
   })
   sku: string;
 
-  @ManyToOne(() => Category, (category) => category.products)
+  @ManyToOne(() => Category, (category) => category.products, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   category: Category;
 
   @Column({

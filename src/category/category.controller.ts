@@ -42,6 +42,7 @@ export class CategoryController {
       take: limit,
       skip: limit * page,
       order: orderBy,
+      relations: ['products'],
     });
   }
 

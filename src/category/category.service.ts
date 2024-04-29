@@ -26,14 +26,18 @@ export class CategoryService {
   }
 
   findOne(id: number) {
-    return this.repository.findOneBy({ id });
+    return this.repository.findOne({
+      where: { id: id },
+      relations: ['products'],
+    });
   }
 
   update(id: number, updateCategoryDto: UpdateCategoryDto) {
-    return `This action updates a #${id} category`;
+    return this.repository.update(id, updateCategoryDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} category`;
+  async remove(id: number) {
+    const obj = await this.repository.findOneBy({ id });
+    return this.repository.remove(obj);
   }
 }

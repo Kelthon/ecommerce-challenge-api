@@ -37,7 +37,6 @@ export class ProductController {
 
     if (sort) {
       orderBy[sort] = order;
-      // `http://localhost:3000/product?sort=${sortBy}&order=${order}&limit=${itemPerPage}&page=${0}`;
     }
 
     return this.productService.findAll(
@@ -53,23 +52,24 @@ export class ProductController {
         take: limit,
         skip: limit * page,
         order: orderBy,
+        relations: ['category'],
       },
       page,
     );
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.productService.findOne(+id);
+  findOne(@Param('id') id: number) {
+    return this.productService.findOne(id);
   }
 
   @Patch('/update/:id')
-  update(@Param('id') id: string, @Body() updateProductDto: UpdateProductDto) {
-    return this.productService.update(+id, updateProductDto);
+  update(@Param('id') id: number, @Body() updateProductDto: UpdateProductDto) {
+    return this.productService.update(id, updateProductDto);
   }
 
   @Delete('/delete/:id')
-  remove(@Param('id') id: string) {
-    return this.productService.remove(+id);
+  remove(@Param('id') id: number) {
+    return this.productService.remove(id);
   }
 }
